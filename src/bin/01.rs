@@ -5,7 +5,10 @@ fn parse_input(input: &str) -> (Vec<u32>, Vec<u32>) {
     let mut half_two: Vec<u32> = Vec::new();
 
     input.lines().for_each(|line| {
-        let numbers: Vec<u32> = line.split_whitespace().map(|number| number.parse::<u32>().unwrap()).collect();
+        let numbers: Vec<u32> = line
+            .split_whitespace()
+            .map(|number| number.parse::<u32>().unwrap())
+            .collect();
         half_one.push(numbers[0]);
         half_two.push(numbers[1]);
     });
@@ -36,7 +39,10 @@ pub fn part_two(input: &str) -> Option<u32> {
 
     let mut total_similarity: u32 = 0;
 
-    half_one.iter().for_each(|&number| total_similarity += number * (half_two.iter().filter(|&number2| *number2 == number)).count() as u32);
+    half_one.iter().for_each(|&number| {
+        total_similarity +=
+            number * (half_two.iter().filter(|&number2| *number2 == number)).count() as u32
+    });
 
     Some(total_similarity)
 }
