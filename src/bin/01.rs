@@ -19,7 +19,6 @@ fn parse_input(input: &str) -> (Vec<u32>, Vec<u32>) {
 
 pub fn part_one(input: &str) -> Option<u32> {
     let (half_one, half_two) = parse_input(input);
-    println!("Half 1: {}, half 2: {}", half_one.len(), half_two.len());
 
     let mut total_dist: u32 = 0;
 
