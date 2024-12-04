@@ -4,7 +4,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 
     let mut xmas_count = 0;
 
-    let lines: Vec<&str> = input.lines().collect();
+    let lines: Vec<Vec<char>> = input.lines().map(|line| line.chars().collect()).collect();
 
     for (char_offset, line_offset) in (-1..2).flat_map(|x| (-1..2).map(move |y| (x, y))) {
         if char_offset == 0 && line_offset == 0 {continue}
@@ -14,7 +14,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     Some(xmas_count)
 }
 
-fn search_offset(lines: &Vec<&str>, char_offset: i32, line_offset: i32) -> u32 {
+fn search_offset(lines: &Vec<Vec<char>>, char_offset: i32, line_offset: i32) -> u32 {
     let mut xmas_count = 0;
 
 
@@ -41,7 +41,7 @@ fn search_offset(lines: &Vec<&str>, char_offset: i32, line_offset: i32) -> u32 {
         'index: for char_loop_index in beg_char_skip..lines[line_loop_index].len()-end_char_skip {
             let (mut char_index, mut line_index) = (char_loop_index as i32, line_loop_index as i32);
             for char in "XMAS".chars() {
-                if lines[line_index as usize].chars().nth(char_index as usize).unwrap() != char { continue 'index};
+                if lines[line_index as usize][char_index as usize] != char { continue 'index};
                 char_index += char_offset;
                 line_index += line_offset;
 
